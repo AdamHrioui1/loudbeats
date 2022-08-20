@@ -1,0 +1,189 @@
+.ranks_big_container {
+    margin-top: 20px;
+    width: 100%;
+    height: 100px;
+
+    overflow: hidden;
+    cursor: none;
+}
+
+.rank_second_container {
+    position: relative;
+    width: auto;
+    height: 100%;
+
+    display: flex;
+
+    transition: .4s cubic-bezier(0.19, 0.75, 0.43, 0.98);
+}
+
+.col {
+    position: absolute;
+    top: 0;
+    padding-right: 50px;
+
+    transition: 1s cubic-bezier(0.19, 0.75, 0.43, 0.98);
+}
+
+.col span {
+    font-weight: 600;
+}
+
+.col .bar_container {
+    margin: 5px 0;
+    width: 100%;
+    height: 5px;
+
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.col .range_bar {
+    width: 50%;
+    height: 100%;
+
+    background-color: #000;
+    border-radius: 5px;
+}
+
+.col .range_data {
+    font-weight: 400;
+    color: #555;
+    float: right;
+}
+
+.col .small_info {
+    margin-top: 13px;
+    display: block;
+    width: 100%;
+
+    text-align: right;
+    font-weight: 400;
+    color: #555;
+}
+
+/*--------- arrow cursor --------*/
+.rank_hover_btn {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    border: 1px solid #000;
+    /* transform: translate(-50%, 150%); */
+
+    transition: .7s ease-out;
+    z-index: 1000;
+}
+
+.rank_hover_btn.active {
+    width: 35px;
+    height: 35px;
+    /* transform: translate(-50%, 90px); */
+}
+
+.rank_hover_btn img {
+    width: 10px;
+    transition: .4s ease-out;
+    pointer-events: none;
+    user-select: none;
+}
+
+.rank_arrow {
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+
+    background-image: url('../../../public/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+
+    transition: .7s ease-out;
+}
+
+.rank_arrow.active {
+    transform: scale(0.3);
+}
+
+.rank_hover_btn.active img {
+    width: 7px;
+}
+
+.rank_cursor {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+
+    background-color: #000;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+@media only screen and (min-width: 1050px) {
+    .col {
+        width: 35%;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .col {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .ranks_big_container {
+        overflow-y: auto;
+        height: auto;
+        cursor: default;
+    }
+
+    .rank_second_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .col {
+        position: relative;
+        width: 100%;
+        padding: 0;
+    }
+
+    .col:nth-child(3) {
+        margin-top: 15px;
+    }
+
+    .col:nth-child(4) {
+        margin-top: 40px;
+    }
+
+    .col:nth-child(5) {
+        margin-top: 40px;
+    }
+
+    .col .small_info {
+        margin-top: 0px;
+        margin-left: auto;
+        display: inline-block;
+        width: auto;
+
+        float: right;
+    }
+
+    .rank_hover_btn {
+        display: none;
+    }
+}

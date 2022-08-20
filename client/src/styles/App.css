@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: poppins;
+
+  user-select: none;
+}
+
+body {
+  width: 100%;
+
+  background-color: #eee;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  cursor: pointer;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: #333; */
+  border: 4px solid transparent;
+  background-clip: content-box;   /* THIS IS IMPORTANT */
+  cursor: pointer;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #222;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+@import url('../navbar/Navbar.css');
+@import url('./Headphones.css');
+@import url('./HeadphonesData.css');
+@import url('../pages/smallComponents/Ranks.css');
+@import url('../pages/ProductDetails/ProductDetails.css');
+@import url('../pages/Cart/Cart.css');
+@import url('../styles/Contact.css');
