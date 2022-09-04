@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { Link, useParams } from 'react-router-dom'
 import GlobaleContext from '../../GlobaleContext'
 import { motion } from 'framer-motion'
+import Error from '../Error'
 
 function ProductDetails() {
     const { id } = useParams()
@@ -15,12 +16,11 @@ function ProductDetails() {
     const [itemInTheCart, setItemInTheCart] = useState(false)
 
     const currentProduct = HeadphonesData.filter(h => h.id === parseInt(id))
-    const { imgs, info, price, name } = currentProduct[0]
 
     useEffect(() => {
         const zoomOutImg = document.querySelectorAll('.zoomOutImg')
         window.scrollTo({ top: 0 , behavior: 'smooth' })
-        id ? window.document.title = name : window.document.title = 'LoudBeats Shop - Home'
+        id && currentProduct.length !== 0 ? window.document.title = currentProduct[0].name : window.document.title = 'LoudBeats Shop - Home'
 
         setTimeout(() => {
             zoomOutImg.forEach((z, i) => {
@@ -54,7 +54,7 @@ function ProductDetails() {
         !item && AddToCart(currentProduct[0])
     }
 
-    if(HeadphonesData.length === 0) return ''
+    if(HeadphonesData.length === 0 || currentProduct.length === 0) return <Error />
 
     return (
         <div className='all_details_container'>
@@ -66,7 +66,7 @@ function ProductDetails() {
                 <h1 className='title'>Description</h1>
                 <ul>
                     {
-                        info.map((li, i) => {
+                        currentProduct[0].info.map((li, i) => {
                             return <li className='desc_li' key={i}>{li}</li>
                         })
                     }
@@ -75,22 +75,22 @@ function ProductDetails() {
                 <div className="price">
                     <div className="price_btn">
                         <span onClick={addtocart}>{itemInTheCart ? 'ITEM IN THE CART' : 'BUY FOR'}</span>
-                        {itemInTheCart ? '' : <img src="../../../upArrow.svg" alt={name} /> }
+                        {itemInTheCart ? '' : <img src="../../../upArrow.svg" alt={currentProduct[0].name} /> }
                     </div>
-                    <h1>${price}</h1>
+                    <h1>${currentProduct[0].price}</h1>
                 </div>
             </div>
         
             <div className="imgs_container_absolute">
 
-                <motion.div layoutId={imgs[0]} transition={{ duration: 1 }} className="image__container">
-                    <img style={{ opacity: 1 }} src={imgs[0]} alt={name} onClick={() => setPopupImg(imgs[0])} />
+                <motion.div layoutId={currentProduct[0].imgs[0]} transition={{ duration: 1 }} className="image__container">
+                    <img style={{ opacity: 1 }} src={currentProduct[0].imgs[0]} alt={currentProduct[0].name} onClick={() => setPopupImg(currentProduct[0].imgs[0])} />
                 </motion.div>
-                <div className="image__container" onClick={() => setPopupImg(imgs[1])} >
-                    <img className='zoomOutImg' src={imgs[1]} alt={name} />
+                <div className="image__container" onClick={() => setPopupImg(currentProduct[0].imgs[1])} >
+                    <img className='zoomOutImg' src={currentProduct[0].imgs[1]} alt={currentProduct[0].name} />
                 </div>
-                <div className="image__container" onClick={() => setPopupImg(imgs[2])}>
-                    <img className='zoomOutImg' src={imgs[2]} alt={name} />
+                <div className="image__container" onClick={() => setPopupImg(currentProduct[0].imgs[2])}>
+                    <img className='zoomOutImg' src={currentProduct[0].imgs[2]} alt={currentProduct[0].name} />
                 </div>
 
                 <div className="multicolor_background" style={{ transform: 'translate(-50%, -50%)' }}>
@@ -102,7 +102,7 @@ function ProductDetails() {
             
             <div className={`popup ${popupImg.length > 0 ? 'show': 'hide'}`}>
                 <div className="times" onClick={() => setPopupImg('')} ></div>
-                <img src={popupImg} alt={name} className='popup_img'/>
+                <img src={popupImg} alt={currentProduct[0].name} className='popup_img'/>
             </div>
         </div>
     )

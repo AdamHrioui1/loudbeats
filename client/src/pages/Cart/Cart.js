@@ -78,7 +78,7 @@ function Cart() {
                 cart.length > 0 &&
                 <div className="total">
                     <h1>Total</h1>
-                    <h1>$<CountUpAnimation counter={total} duration={500}>{total.toFixed(2)}</CountUpAnimation></h1>
+                    <h1>$<CountUpAnimation counter={total} duration={500}>{total}</CountUpAnimation></h1>
                 </div>
             }
             {

@@ -13,6 +13,7 @@ import AirpodDetails from './pages/ProductDetails/AirpodDetails'
 import FlexpodsDetails from './pages/ProductDetails/FlexpodsDetails'
 import Cart from './pages/Cart/Cart'
 import Contact from './pages/Contact'
+import Error from './pages/Error'
 
 function Routers() {
   return (
@@ -34,6 +35,7 @@ function Routers() {
           <Route path='/flexpoddetails/:id' element={<FlexpodsDetails />} />
 
           <Route path='/cart' element={<Cart />} />
+          <Route path='*' element={<Error />} />
         </Routes>
       </Router>
     </AnimateSharedLayout>

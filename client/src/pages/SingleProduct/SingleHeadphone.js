@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import GlobaleContext from '../../GlobaleContext'
 import gsap from 'gsap'
 import { motion } from 'framer-motion'
+import Error from '../Error'
 
 function SingleHeadphone() {
   let { id } = useParams()
@@ -16,11 +17,10 @@ function SingleHeadphone() {
   let btnRef = useRef(null)
 
   let headphone = HeadphonesData.filter(p => p.id === parseInt(id))
-  const { brand, name, description, imgs } = headphone[0]
 
   useEffect(() => {
     window.scrollTo({ top: 0 , behavior: 'smooth' })
-    id ? window.document.title = name : window.document.title = 'LoudBeats Shop - Home'
+    id && headphone.length !== 0 ? window.document.title = headphone[0].name : window.document.title = 'LoudBeats Shop - Home'
 
     gsap.fromTo(brandRef.current, { opacity: 0, y: 50}, { opacity: 1, y: 0, duration: 1, delay: 0.0 })
     gsap.fromTo(nameRef.current, { opacity: 0, y: 50}, { opacity: 1, y: 0, duration: 1, delay: 0.1 })
@@ -28,7 +28,7 @@ function SingleHeadphone() {
     gsap.fromTo(btnRef.current, { opacity: 0, y: 50}, { opacity: 1, y: 0, duration: 1, delay: 0.3 })
   }, [])
 
-  if(HeadphonesData.length === 0) return ''
+  if(HeadphonesData.length === 0 || headphone.length === 0) return <Error />
 
   return (
     <div className='singleproduct'>
@@ -36,7 +36,7 @@ function SingleHeadphone() {
         <img src="../../../backArrow.svg" alt="" />
         <Link to='/'>Back</Link>
       </div>
-      <motion.img layoutId={imgs[0]} transition={{ duration: 1 }} src={imgs[0]} alt={name} />
+      <motion.img layoutId={headphone[0].imgs[0]} transition={{ duration: 1 }} src={headphone[0].imgs[0]} alt={headphone[0].name} />
       
       <div className="multicolor_background">
         <div className="first_color"></div>
@@ -44,11 +44,11 @@ function SingleHeadphone() {
       </div>
 
       <div className="sp_infos">
-        <span ref={brandRef}>{brand}</span>
-        <h1 ref={nameRef}>{name}</h1>
+        <span ref={brandRef}>{headphone[0].brand}</span>
+        <h1 ref={nameRef}>{headphone[0].name}</h1>
 
         <div className="sp_p_container">
-          <p ref={paragraphRef}>{description}</p>
+          <p ref={paragraphRef}>{headphone[0].description}</p>
         </div>
 
         <Ranks headphone={headphone} />
